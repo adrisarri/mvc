@@ -22,6 +22,27 @@ class Model_user {
 	 unset($_REQUEST['delete_user']);
 	 header('Location: index.php');
     }
+    public function upload_users($csv)
+    {
+	 $fechaActual = date('YmdHis');
+	 $target_file = "uploads/carga_usuarios-" . $fechaActual . ".csv";
+	 move_uploaded_file($csv, $target_file);
+	 $linea = 0;
+	 $usuarios = array();
+	 $archivo = fopen($target_file, "r");
+	 while (($datos = fgetcsv($archivo, ";")) == true){
+  	 	$num = count($datos);
+ 		$linea++;
+  		for ($columna = 0; $columna < $num; $columna++){
+			if($linea>1){
+				$campo = explode(";", $datos[$columna]);
+				array_push($usuarios, $campo);
+			}
+     		}
+	 }
+	 fclose($archivo);
+	 return $usuarios;
+    }
 }
 
 ?>

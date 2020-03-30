@@ -92,6 +92,16 @@ class Controller {
    			 $controller->invoke(); 
    
    		 break;
+
+   		 case 'upload_users':
+
+   			 include 'controller/Controller_upload_users.php';
+
+   			 $controller = new controller_upload_users();
+
+   			 $controller->invoke(); 
+   
+   		 break;
    		 }
 
    	 }
